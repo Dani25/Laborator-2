@@ -27,3 +27,29 @@ function on_device_orientation(evt)
 	context.rect(-latura_patrat/2, -latura_patrat/2, latura_patrat, latura_patrat)
 	context.stroke();
 }
+
+function permission () {
+
+    if ( typeof( DeviceOrientationEvent ) !== "undefined" && typeof( DeviceOrientationEvent.requestPermission ) === "function" ) {
+
+        DeviceOrientationEvent.requestPermission()
+
+            .then( response => {
+
+            if ( response == "granted" ) {
+
+                window.addEventListener( "deviceorientation", on_device_orientation)
+
+            }
+
+        })
+
+            .catch( console.error )
+
+    } else {
+
+        alert( "DeviceOrientationEvent is not defined" );
+
+    }
+
+}
